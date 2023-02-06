@@ -188,8 +188,8 @@ class Arena:
             self.A.set_special_attack(special_attack_A + special_attack_increment)
 
         elif tipo_pokemon_A == agua and tipo_pokemon_B == planta:
-            self.A.set_attack(ataque_A + basic_attack_increment)
-            self.A.set_special_attack(special_attack_A + special_attack_increment)
+            self.B.set_attack(ataque_B + 10)
+            self.B.set_special_attack(special_attack_A + special_attack_increment)
 
         # BLOCO 2 
         elif tipo_pokemon_A == fogo and tipo_pokemon_B == agua:
@@ -202,7 +202,7 @@ class Arena:
 
         # BLOCO 3
         elif tipo_pokemon_A == planta and tipo_pokemon_B == agua:
-            self.A.set_attack(ataque_A + basic_attack_increment)
+            self.A.set_attack(ataque_A + 10)
             self.A.set_special_attack(special_attack_A + special_attack_increment)
 
         elif tipo_pokemon_A == planta and tipo_pokemon_B == fogo:

@@ -2,7 +2,7 @@ from implementation.pokemon import Pokemon
 
 class Charmeleon(Pokemon):
     
-    def __init__(self, pokemon: str = 'Charmeleon', hp: int = 115, attack: int = 50, defense: int = 40, special_attack: int = 50, numero_vitorias: int = 1, numero_derrotas: int = 0, level: int = 2, evolucao_ant: str = 'Charmander', evolucao_pos: str = 'Charizard', tipo: str = 'Fogo') -> None:
+    def __init__(self, pokemon: str = 'Charmeleon', hp: int = 115, attack: int = 30, defense: int = 25, special_attack: int = 40, numero_vitorias: int = 1, numero_derrotas: int = 0, level: int = 2, evolucao_ant: str = 'Charmander', evolucao_pos: str = 'Charizard', tipo: str = 'Fogo') -> None:
         super().__init__(pokemon, hp, attack, defense, special_attack, numero_vitorias, numero_derrotas, level, evolucao_ant, evolucao_pos, tipo)
         
     def evoluir(self):

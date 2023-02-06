@@ -1,7 +1,7 @@
 from implementation.pokemon import Pokemon
 
 class Ivysaur(Pokemon):
-    def __init__(self, pokemon: str = 'Ivysaur', hp: int = 115, attack: int = 40, defense: int = 40, special_attack: int = 50, numero_vitorias: int = 1, numero_derrotas: int = 0, level: int = 2, evolucao_ant: str = 'Bubasaur', evolucao_pos: str = 'Venusaur', tipo: str = 'Planta') -> None:
+    def __init__(self, pokemon: str = 'Ivysaur', hp: int = 115, attack: int = 25, defense: int = 25, special_attack: int = 45, numero_vitorias: int = 1, numero_derrotas: int = 0, level: int = 2, evolucao_ant: str = 'Bubasaur', evolucao_pos: str = 'Venusaur', tipo: str = 'Planta') -> None:
         super().__init__(pokemon, hp, attack, defense, special_attack, numero_vitorias, numero_derrotas, level, evolucao_ant, evolucao_pos, tipo)
 
     def evoluir(self):

@@ -2,7 +2,7 @@ from implementation.pokemon import Pokemon
 
 class Wartortle(Pokemon):
     
-    def __init__(self, pokemon: str = 'Wartortle', hp: int = 115, attack: int = 40, defense: int = 50, special_attack: int = 50, numero_vitorias: int = 1, numero_derrotas: int = 0, level: int = 2, evolucao_ant: str = 'Squirtle', evolucao_pos: str = 'Blastoise', tipo: str = 'Água') -> None:
+    def __init__(self, pokemon: str = 'Wartortle', hp: int = 115, attack: int = 25, defense: int = 30, special_attack: int = 40, numero_vitorias: int = 1, numero_derrotas: int = 0, level: int = 2, evolucao_ant: str = 'Squirtle', evolucao_pos: str = 'Blastoise', tipo: str = 'Água') -> None:
         super().__init__(pokemon, hp, attack, defense, special_attack, numero_vitorias, numero_derrotas, level, evolucao_ant, evolucao_pos, tipo)
 
 

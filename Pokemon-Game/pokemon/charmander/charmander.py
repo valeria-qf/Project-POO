@@ -1,7 +1,7 @@
 from implementation.pokemon import Pokemon
 
 class Charmander(Pokemon):
-    def __init__(self, pokemon: str = 'Charmander', hp: int = 100, attack: int = 40, defense: int = 30, special_attack: int = 50, numero_vitorias: int = 0, numero_derrotas: int = 0, level: int = 1, evolucao_ant: str = '-', evolucao_pos: str = 'Charmeleon', tipo: str = 'Fogo') -> None:
+    def __init__(self, pokemon: str = 'Charmander', hp: int = 100, attack: int = 25, defense: int = 20, special_attack: int = 30, numero_vitorias: int = 0, numero_derrotas: int = 0, level: int = 1, evolucao_ant: str = '-', evolucao_pos: str = 'Charmeleon', tipo: str = 'Fogo') -> None:
         super().__init__(pokemon, hp, attack, defense, special_attack, numero_vitorias, numero_derrotas, level, evolucao_ant, evolucao_pos, tipo)
 
     def evoluir(self):

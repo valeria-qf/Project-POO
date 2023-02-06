@@ -118,7 +118,7 @@ class Pokedex:
         
             replay: bool = True
             while replay:
-                if pokemon_evolucao.get_numero_vitorias() < 4:
+                if pokemon_evolucao.get_numero_vitorias() < 3:
             
                     print('[green]Deseja continuar? [bold][white]\n\n1 - SIM \n2 - NÃO\n')
                     acao = int(input())
@@ -157,7 +157,7 @@ class Pokedex:
                         print('[bold][green]F I M')
 
                 else:
-                    print('F I M')
+                    print('[bold][green]F I M')
                     break
 
     def create_pokemon(self, level: int, pokemon_option: int) -> Pokemon:

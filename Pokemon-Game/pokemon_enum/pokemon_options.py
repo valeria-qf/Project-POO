@@ -1,4 +1,5 @@
 from enum import Enum
+from rich import print
 
 class PokemonOptions(Enum):
     atacar = 1
@@ -10,6 +11,6 @@ class PokemonOptions(Enum):
 
     def print_values(enable_special_attack: bool):
         if enable_special_attack:
-                return '\n1 - Atacar \n2 - Defender \n3 - Ataque especial\n\n'
+                return '\n[white]1 - Atacar \n2 - Defender \n3 - Ataque especial\n\n'
         else:
-                return '\n1 - Atacar \n2 - Defender \n\n'
+                return '\n[white]1 - Atacar \n2 - Defender \n\n'

@@ -10,10 +10,10 @@ from pokemon.charmander.charizard import Charizard
 from pokemon.squirtle.squirtle import Squirtle
 from pokemon.squirtle.wartortle import Wartortle
 from pokemon.squirtle.blastoise import Blastoise
-from tqdm import tqdm
 from rich import print
 import time
 import os
+from tqdm import tqdm
 class Pokedex:
 
     def __init__(self, pokemon_list: PokemonList) -> None:
@@ -27,7 +27,7 @@ class Pokedex:
         print('\n[bold]\nPressione [yellow]ENTER [white]para continuar!')
 
         input()
-        os.system('clear')
+        os.system('cls')
 
     def select_pokemon_level(self):
         self.start_game()
@@ -51,7 +51,9 @@ class Pokedex:
 
         elif pokemon_level == 2:
             self.__pokemon_list.list_pokemon_level2()
+            self.choose_pokemon_A()
             fist_pokemon = int(input())
+            self.choose_pokemon_B()
             second_pokemon = int(input())
             pokemon_one = self.create_pokemon(pokemon_level, fist_pokemon)
             pokemon_two = self.create_pokemon(pokemon_level, second_pokemon)
@@ -59,7 +61,9 @@ class Pokedex:
         elif pokemon_level == 3:
 
             self.__pokemon_list.list_pokemon_level3()
+            self.choose_pokemon_A()
             fist_pokemon = int(input())
+            self.choose_pokemon_B()
             second_pokemon = int(input())
             pokemon_one = self.create_pokemon(pokemon_level, fist_pokemon)
             pokemon_two = self.create_pokemon(pokemon_level, second_pokemon)
@@ -67,22 +71,27 @@ class Pokedex:
         else:
             print('\nOpção inválida, tente novamente!\n')
         
-        os.system('clear')
+        os.system('cls')
 
         print('[bold]\n-------------------------------\n[red]JOGADOR 1 [white]escolheu {} \n\n[blue]JOGADOR 2 [white]escolheu {}\n-------------------------------\n\n'.format(pokemon_one.get_pokemon(), pokemon_two.get_pokemon()))
 
         print('[yellow][bold]\n---------- CRIANDO ARENA ----------\n')
-        for i in tqdm(range(10)):
+        for i in tqdm(range(0, 10)):
             time.sleep(0.2)
         
         print('\n[bold]Pressione [yellow]ENTER [white]para continuar!')
         input()
-        os.system('clear')
+        os.system('cls')
 
         arena = Arena(A = pokemon_one, B = pokemon_two)
         # arena.batalhar retorna o pokemon vencedor da batalha
         pokemon_vencedor = arena.batalhar()
 
+        if pokemon_vencedor == None:
+                pokemon_one.reset_hp()
+                pokemon_two.reset_hp()
+                newArena = Arena(A = pokemon_one, B = pokemon_two)
+                pokemon_vencedor = newArena.batalhar()
 
         if pokemon_vencedor != None:
 
@@ -106,43 +115,50 @@ class Pokedex:
             elif isinstance(pokemon_vencedor, Wartortle):
                 pokemon_evolucao = Blastoise()
 
+        
             replay: bool = True
-
             while replay:
+                if pokemon_evolucao.get_numero_vitorias() < 4:
+            
+                    print('[green]Deseja continuar? [bold][white]\n\n1 - SIM \n2 - NÃO\n')
+                    acao = int(input())
 
-                print('[green]Deseja continuar? [bold][white]\n\n1 - SIM \n2 - NÃO\n')
-                acao = int(input())
+                    if acao == 1:
+                        nivel_vencedor = pokemon_vencedor.get_level()
 
-                if acao == 1:
-                    nivel_vencedor = pokemon_vencedor.get_level()
-
-                    print('[green]Escolha um Pokémon abaixo:\n')
-                    
-                    '''if nivel_vencedor == 1:
-                        self.__pokemon_list.list_pokemon_level1()
-
-                        second_pokemon = int(input())
-                        new_oponent = self.create_pokemon(1, other_pokemon)
-                    '''
-
-                    if nivel_vencedor == 2:
-                        self.__pokemon_list.list_pokemon_level2()
-
-                        other_pokemon = int(input())
-                        new_oponent = self.create_pokemon(2, other_pokemon)
-
-
-                    elif nivel_vencedor == 3:
-                        self.__pokemon_list.list_pokemon_level3()
+                        print('[green]Escolha um Pokémon abaixo:\n')
                         
-                        other_pokemon = int(input())
-                        new_oponent = self.create_pokemon(3, other_pokemon)
+                        '''if nivel_vencedor == 1:
+                            self.__pokemon_list.list_pokemon_level1()
+
+                            second_pokemon = int(input())
+                            new_oponent = self.create_pokemon(1, other_pokemon)
+                        '''
+
+                        if nivel_vencedor == 2:
+                            self.__pokemon_list.list_pokemon_level2()
+
+                            other_pokemon = int(input())
+                            new_oponent = self.create_pokemon(2, other_pokemon)
+
+
+                        elif nivel_vencedor == 3:
+                            self.__pokemon_list.list_pokemon_level3()
+                            
+                            other_pokemon = int(input())
+                            new_oponent = self.create_pokemon(3, other_pokemon)
+                            
+                        new_arena = Arena(A = pokemon_evolucao, B = new_oponent)
+                        pokemon_vencedor.reset_hp()
+                        pokemon_vencedor = new_arena.batalhar()
                         
-                    new_arena = Arena(A = pokemon_evolucao, B = new_oponent)
-                    pokemon_vencedor = new_arena.batalhar()
-                    
-                elif acao == 2:
-                    replay = False
+                    elif acao == 2:
+                        replay = False
+                        print('[bold][green]F I M')
+
+                else:
+                    print('F I M')
+                    break
 
     def create_pokemon(self, level: int, pokemon_option: int) -> Pokemon:
         

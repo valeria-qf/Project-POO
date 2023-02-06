@@ -1,6 +1,7 @@
 from implementation.pokemon import Pokemon
 from pokemon_enum.pokemon_options import PokemonOptions
 from rich import print
+
 import os
 class Arena:
 
@@ -16,8 +17,8 @@ class Arena:
 
         while ((self.A.get_hp() > 0) and (self.B.get_hp() > 0)):
 
-            enable_special_attack_pokemon_A = self.A.get_hp() > 1 and self.A.get_hp() <= 30
-            enable_special_attack_pokemon_B = self.B.get_hp() > 1 and self.B.get_hp() <= 30
+            enable_special_attack_pokemon_A = self.A.get_hp() > 1 and self.A.get_hp() <= 50
+            enable_special_attack_pokemon_B = self.B.get_hp() > 1 and self.B.get_hp() <= 50
 
 
             print(self.A.list_options(enable_special_attack = enable_special_attack_pokemon_A))
@@ -65,34 +66,33 @@ class Arena:
 
         if self.A.get_hp() == 0 and self.B.get_hp() == 0:
             print('--------------------\nEMPATE!\n--------------------')
+
             return None
-            
 
         elif self.A.get_hp() == 0 and self.B.get_hp() != 0:
 
-            os.system('clear')
+            os.system('cls')
 
             print('[bold]\n{} VENCEU! :trophy:\n'.format(self.B.get_pokemon()))
             self.A.set_numero_derrotas()
             self.B.set_numero_vitorias()
 
-            
-            print('\n[yellow][bold]*** EVOLUÇÃO! *** \n[white]{}\n'.format(self.B))
-
+            if self.B.get_numero_vitorias() < 3:
+                print('\n[yellow][bold]*** EVOLUÇÃO! *** \n[white]{}\n'.format(self.B))
 
             return self.B
 
         elif self.B.get_hp() == 0 and self.A.get_hp() != 0:
 
-            os.system('clear')
+            os.system('cls')
             
             print('[bold]\n{} VENCEU! :trophy:\n'.format(self.A.get_pokemon()))
 
             self.B.set_numero_derrotas()
             self.A.set_numero_vitorias()
 
-            print('\n[yellow][bold]*** EVOLUÇÃO! *** \n[white]{}\n'.format(self.A))
-            
+            if self.A.get_numero_vitorias() < 3:
+                print('\n[yellow][bold]*** EVOLUÇÃO! *** \n[white]{}\n'.format(self.A))
 
             return self.A
 
@@ -108,14 +108,12 @@ class Arena:
             self.A.atacar(self.B)
             self.B.atacar(self.A)
         
-            self.print_hp()
 
         # BLOCO 1.2
         elif option1 == PokemonOptions.atacar and option2 == PokemonOptions.defender:
             
             self.B.defender(self.A)
 
-            self.print_hp()
 
         # BLOCO 1.3
         elif option1 == PokemonOptions.atacar and option2 == PokemonOptions.ataque_especial:
@@ -123,26 +121,24 @@ class Arena:
             self.A.atacar(self.B)
             self.B.ataque_especial(self.A)
 
-            self.print_hp()
 
         # BLOCO 2.1
         elif option1 == PokemonOptions.defender and option2 == PokemonOptions.atacar:
 
             self.A.defender(self.B)
             
-            self.print_hp()
 
         # BLOCO 2.2
-        elif option1 == PokemonOptions.defender and option2 == PokemonOptions.defender:
+        #elif option1 == PokemonOptions.defender and option2 == PokemonOptions.defender:
 
-            self.print_hp()
+
 
         # BLOCO 2.3
         elif option1 == PokemonOptions.defender and option2 == PokemonOptions.ataque_especial:
 
             self.A.defender(self.B, is_special_attack = True)
 
-            self.print_hp()
+            
 
         # BLOCO 3.1
         elif option1 == PokemonOptions.ataque_especial and option2 == PokemonOptions.atacar:
@@ -150,21 +146,20 @@ class Arena:
             self.A.ataque_especial(self.B)
             self.B.atacar(self.A)
         
-            self.print_hp()
+            
 
         # BLOCO 3.2
         elif option1 == PokemonOptions.ataque_especial and option2 == PokemonOptions.defender:
 
             self.B.defender(self.A, is_special_attack = True)
 
-            self.print_hp()
 
         # BLOCO 3.3
         elif option1 == PokemonOptions.ataque_especial and option2 == PokemonOptions.ataque_especial:
             self.A.ataque_especial(self.B)
             self.B.ataque_especial(self.A)
 
-            self.print_hp()
+        self.print_hp()
 
     def print_hp(self):
 
@@ -180,33 +175,36 @@ class Arena:
         ataque_B = self.B.get_attack()
         special_attack_B = self.B.get_special_attack()
 
+        tipo_pokemon_A = self.A.get_tipo()
+        tipo_pokemon_B = self.B.get_tipo()
+
         agua = 'Água'
         fogo = 'Fogo'
         planta = 'Planta'
 
         # BLOCO 1
-        if ataque_A == agua and ataque_B == fogo:
+        if  tipo_pokemon_A == agua and tipo_pokemon_B == fogo:
             self.A.set_attack(ataque_A + basic_attack_increment)
             self.A.set_special_attack(special_attack_A + special_attack_increment)
 
-        elif ataque_A == agua and ataque_B == planta:
+        elif tipo_pokemon_A == agua and tipo_pokemon_B == planta:
             self.A.set_attack(ataque_A + basic_attack_increment)
             self.A.set_special_attack(special_attack_A + special_attack_increment)
 
         # BLOCO 2 
-        elif ataque_A == fogo and ataque_B == agua:
+        elif tipo_pokemon_A == fogo and tipo_pokemon_B == agua:
             self.B.set_attack(ataque_B + basic_attack_increment)
             self.B.set_special_attack(special_attack_B + special_attack_increment)
 
-        elif ataque_A == fogo and ataque_B == planta:
+        elif tipo_pokemon_A == fogo and tipo_pokemon_B == planta:
             self.A.set_attack(ataque_A + basic_attack_increment)
             self.A.set_special_attack(special_attack_A + special_attack_increment)
 
         # BLOCO 3
-        elif ataque_A == planta and ataque_B == agua:
+        elif tipo_pokemon_A == planta and tipo_pokemon_B == agua:
             self.A.set_attack(ataque_A + basic_attack_increment)
             self.A.set_special_attack(special_attack_A + special_attack_increment)
 
-        elif ataque_A == planta and ataque_B == fogo:
+        elif tipo_pokemon_A == planta and tipo_pokemon_B == fogo:
             self.B.set_attack(ataque_B + basic_attack_increment)
             self.B.set_special_attack(special_attack_B + special_attack_increment)

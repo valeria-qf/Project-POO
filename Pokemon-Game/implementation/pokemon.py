@@ -57,6 +57,17 @@ class Pokemon(IPokemon):
 
     def evoluir(self):
         return 
+    
+    def reset_hp(self):
+        if self.__level == 1:
+            self.__hp = 100
+        
+        elif self.__level == 2:
+            self.__hp = 115
+
+        elif self.__level == 3:
+            self.__hp = 130
+
 
     def list_options(self, enable_special_attack: bool):
         return PokemonOptions.print_values(enable_special_attack)

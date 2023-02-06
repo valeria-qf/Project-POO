@@ -1,6 +1,6 @@
-from pokemon.bubasaur.bubasaur import Bubasaur
+from implementation.pokemon import Pokemon
 
-class Ivysaur(Bubasaur):
+class Ivysaur(Pokemon):
     def __init__(self, pokemon: str = 'Ivysaur', hp: int = 115, attack: int = 40, defense: int = 40, special_attack: int = 50, numero_vitorias: int = 1, numero_derrotas: int = 0, level: int = 2, evolucao_ant: str = 'Bubasaur', evolucao_pos: str = 'Venusaur', tipo: str = 'Planta') -> None:
         super().__init__(pokemon, hp, attack, defense, special_attack, numero_vitorias, numero_derrotas, level, evolucao_ant, evolucao_pos, tipo)
 
@@ -12,5 +12,7 @@ class Ivysaur(Bubasaur):
             self.set_defense(50)
             self.set_special_attack(60)
             self.set_level(3)
+            self.set_evolucao_ant('Ivysaur')
+            self.set_evolucao_pos('-')
             return super().evoluir()
 

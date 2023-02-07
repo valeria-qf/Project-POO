@@ -100,12 +100,13 @@ class Pokedex:
                     pokemon_one.reset_hp()
                     pokemon_two.reset_hp()
                     newArena = Arena(A = pokemon_one, B = pokemon_two)
+
                     # o método batalhar possui um parâmetro que é o is_tie(empate) que vai receber True quando for um empate
                     pokemon_vencedor = newArena.batalhar(is_tie = True)
 
+        # Quando houver um pokemon vencedor, o replay recebe True, logo vai ficar preso no while e verificando o vencedor e iniciando uma nova batalha
         if pokemon_vencedor != None:
 
-            # Quando houver um pokemon vencedor, o replay recebe True, logo vai ficar preso no while e verificando o vencedor e iniciando uma nova batalha
             replay: bool = True
             while replay:
 
@@ -240,13 +241,13 @@ class Pokedex:
     def get_pokemon_list(self):
         return self.__pokemon_list
     
+    # Método que cria uma animação de carregamento da arena sendo criada com o uso do módulo tqdm
     def carregamento_arena_criada(self):
         print('[yellow][bold]\n---------- CRIANDO ARENA ----------\n')
         for i in tqdm(range(0, 10)):
             time.sleep(0.2)
 
     #Os métodos abaixo printam cada jogador na hora de escolher seu pokémon
-
     def choose_pokemon_A(self):
             print('\n[bold][red]JOGADOR 1' , '[bold]escolha o seu Pokémon!')
 

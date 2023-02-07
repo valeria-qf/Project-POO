@@ -28,12 +28,12 @@ class Arena:
             enable_special_attack_pokemon_A = self.A.get_hp() >= 1 and self.A.get_hp() <= 50
             enable_special_attack_pokemon_B = self.B.get_hp() >= 1 and self.B.get_hp() <= 50
 
-            # Se a variável booleana for True, aparece no menu a opção de ataque especial, senão, aparece apenas atacar e defender
+            # Se a variável booleana for True, aparece no menu de A a opção de ataque especial, senão, aparece apenas atacar e defender
             print(self.A.list_options(enable_special_attack = enable_special_attack_pokemon_A))
             print('\n[bold][red]JOGADOR 1', 'é a sua vez!\n')
             acaoJogador1 = input()
 
-            # Se a variável booleana for True, aparece no menu a opção de ataque especial, senão, aparece apenas atacar e defender
+            # Se a variável booleana for True, aparece no menu de B a opção de ataque especial, senão, aparece apenas atacar e defender
             print(self.B.list_options(enable_special_attack = enable_special_attack_pokemon_B))
             print('[bold][blue]JOGADOR 2', 'é a sua vez!\n')
             acaoJogador2 = input()

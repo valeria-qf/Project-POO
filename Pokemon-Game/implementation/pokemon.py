@@ -1,9 +1,11 @@
 '''Importação da interface IPokemon'''
 from interface.ipokemon import IPokemon
 from pokemon_enum.pokemon_options import PokemonOptions
-'''Criação da classe concreta Pokemon que implementa a IPokemon'''
+
+'''Criação da classe concreta Pokemon que implementa a interface IPokemon'''
 class Pokemon(IPokemon):
 
+    # Construtor da classe Pokemon'''
     def __init__(self, pokemon: str, hp: int, attack: int, defense: int, special_attack: int, numero_vitorias: int, numero_derrotas: int, level: int, evolucao_ant: str, evolucao_pos: str, tipo: str) -> None: 
         self.__pokemon = pokemon
         self.__hp = hp
@@ -17,8 +19,14 @@ class Pokemon(IPokemon):
         self.__evolucao_pos = evolucao_pos
         self.__tipo = tipo
 
+    # Método que retorna os atributos de pokémon em string
     def __str__(self) -> str:
         return '\n---------------------------\nPokémon: {} \nTipo: {} \nHp: {} \nAttack: {} \nDefense: {} \nSpecial attack: {} \nLevel: {}\nVictories: {} \nDefeats: {} \nPrevious evolution: {} \nNext evolution: {}\n---------------------------'.format(self.__pokemon, self.__tipo, self.__hp, self.__attack, self.__defense, self.__special_attack, self.__level, self.__numero_vitorias, self.__numero_derrotas, self.__evolucao_ant, self.__evolucao_pos)
+
+
+    ''' Método atacar passa o rival como parâmetro
+    Se o hp do rival por menor que o ataque, o hp do rival recebe '0'
+    Senão, o hp do rival apenas decrementa do ataque'''
 
     def atacar(self, rival) -> int:
         if rival.__hp < self.__attack:
@@ -26,12 +34,26 @@ class Pokemon(IPokemon):
         else:
             rival.__hp -= self.__attack
 
+    ''' Método ataque_especial passa o rival como parâmetro
+        Se o hp do rival por menor que o ataque, o hp do rival recebe '0'
+        Senão, o hp do rival apenas decrementa do ataque_especial'''
+
     def ataque_especial(self, rival):
         if rival.__hp < self.__special_attack:
             rival.__hp = 0
         else:
             rival.__hp -= self.__special_attack
 
+    ''' Método defender passa como parâmetro o rival e uma váriavel booleana que recebe um valor default False
+        Se essa variável for True, o pokémon vai defender do ataque especial do rival
+        Senão, o pokémon defende apenas do ataque básico.
+    
+    Como funciona a defesa:
+        Se o valor da defesa for maior que o valor do ataque/ataque especial do rival, o dano é '0'
+        Senão, o dano recebe o valor do ataque do rival menos o valor da defesa
+        
+        Se o hp for menor que o dano, o hp recebe '0'
+        Senão, o hp apenas decrementa do dano'''
     def defender(self, rival, is_special_attack: bool = False) -> int:
             
             if is_special_attack:
@@ -54,22 +76,13 @@ class Pokemon(IPokemon):
             else:
                 self.__hp -= dano
 
-
+    '''Método evoluir é chamado o número de vitórias em set_numero_vitorias é incrementado
+        Quando o evoluir é chamado, as informações do pokémon são setadas e cada um possui o seu evoluir diferente'''
     def evoluir(self):
-        return 
-    
-    def reset_hp(self):
-        if self.__level == 1:
-            self.__hp = 100
-        
-        elif self.__level == 2:
-            self.__hp = 115
+        return # retorno que não gera resultado
 
-        elif self.__level == 3:
-            self.__hp = 130
-
-
-    def list_options(self, enable_special_attack: bool):
+    '''Método que lista as opções do pokemon na batalha(atacar, defender, ataque especial)'''
+    def list_options(self, enable_special_attack: bool): # Ataque especial só fica disponivel quando for True
         return PokemonOptions.print_values(enable_special_attack)
         
     '''GETTERS'''
@@ -143,5 +156,3 @@ class Pokemon(IPokemon):
     def set_tipo(self, other: str):
         self.__tipo = other
     
-        
-

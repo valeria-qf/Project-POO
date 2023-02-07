@@ -4,6 +4,7 @@ class Bubasaur(Pokemon):
     def __init__(self, pokemon: str = 'Bubasaur', hp: int = 100, attack: int = 20, defense: int = 20, special_attack: int = 35, numero_vitorias: int = 0, numero_derrotas: int = 0, level: int = 1, evolucao_ant: str = '-', evolucao_pos: str = 'Ivysaur', tipo: str = 'Planta') -> None:
         super().__init__(pokemon, hp, attack, defense, special_attack, numero_vitorias,  numero_derrotas, level, evolucao_ant, evolucao_pos, tipo)
 
+    ''' Se o número de vitórias for igual a 1, o pokémon evolui a primeira vez e suas características são setadas'''
     def evoluir(self):
         if self.get_numero_vitorias() == 1:
             self.set_pokemon('Ivysaur')

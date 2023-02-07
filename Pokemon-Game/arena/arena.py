@@ -24,8 +24,9 @@ class Arena:
         # Enquanto o hp de ambos os pokémon for maior que '0' a batalha continua
         while ((self.A.get_hp() > 0) and (self.B.get_hp() > 0)):
 
-            enable_special_attack_pokemon_A = self.A.get_hp() > 1 and self.A.get_hp() <= 50
-            enable_special_attack_pokemon_B = self.B.get_hp() > 1 and self.B.get_hp() <= 50
+            # Quando o pokémon entiver com seu hp em um intervalo entre 1 e 50, a variável enable_special_attack vai receber um valor booleano. Quando for True, a opção do ataque especial é liberada
+            enable_special_attack_pokemon_A = self.A.get_hp() >= 1 and self.A.get_hp() <= 50
+            enable_special_attack_pokemon_B = self.B.get_hp() >= 1 and self.B.get_hp() <= 50
 
 
             print(self.A.list_options(enable_special_attack = enable_special_attack_pokemon_A))

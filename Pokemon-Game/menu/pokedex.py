@@ -99,6 +99,7 @@ class Pokedex:
                     pokemon_one.reset_hp()
                     pokemon_two.reset_hp()
                     newArena = Arena(A = pokemon_one, B = pokemon_two)
+                    # o método batalhar possui um parâmetro que é o is_tie(empate) que vai receber True quando for um empate
                     pokemon_vencedor = newArena.batalhar(is_tie = True)
 
         if pokemon_vencedor != None:

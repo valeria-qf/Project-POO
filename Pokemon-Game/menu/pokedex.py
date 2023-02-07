@@ -19,16 +19,18 @@ class Pokedex:
     def __init__(self, pokemon_list: PokemonList) -> None:
         self.__pokemon_list = pokemon_list
 
+    # Método que printa texto no início do jogo
     def start_game(self):
         print('[yellow][bold]\nPOKÉMON GAME\n')
         print('Bem vindo ao Pokémon game um mini jogo onde você iniciará sua jornada como treinador pokémon! \nPara iniciar o jogo, primeiro é selecionado o level da batalha e depois \ncada jogador deverá escolher seu pokémon de acordo com o level escolhido.\n\n[bold][white]Ex: level 1 [bold]\n\nBubasaur :seedling: \nCharmander :fire: \nSquirtle :droplet:\n')
 
         
-        print('\n[bold]\nPressione [yellow]ENTER [white]para continuar!')
+        print('[bold]\nPressione [yellow]ENTER [white]para continuar!')
 
         input()
         os.system('cls')
 
+    # Método que seleciona o level da batalha, instancia os pokémon, instancia uma arena e chama a batalha
     def select_pokemon_level(self):
         # O start_game dá print no texto inicial do jogo
         self.start_game()
@@ -38,15 +40,17 @@ class Pokedex:
 
         print('\n[green]Escolha um Pokémon abaixo:')
 
+        # Inicialização de duas váriáveis que serão instanciadas com um pokémon
         pokemon_one: Pokemon
         pokemon_two: Pokemon
 
         # Verifica qual o level escolhido e mostra as opções de pokemon acordo com a escolha.Um input é dado para cada jogador. Após isso, o método create_pokemon é chamado e é passado como parâmetro o level escolhido e o pokemon escolhido. Esse método verifica qual o pokémon que vai ser criado e gera um retorno que é instanciado em pokemon_one e pokemon_two
+
         if pokemon_level == 1:
             self.__pokemon_list.list_pokemon_level1()
-            self.choose_pokemon_A()
+            self.choose_pokemon_A() # Método que printa que é a vez do jogador 1 escolher
             fist_pokemon = int(input())
-            self.choose_pokemon_B()
+            self.choose_pokemon_B()  # Método que printa que é a vez do jogador 2 escolher
             second_pokemon = int(input())
             pokemon_one = self.create_pokemon(pokemon_level, fist_pokemon)
             pokemon_two = self.create_pokemon(pokemon_level, second_pokemon)
@@ -71,7 +75,7 @@ class Pokedex:
             pokemon_two = self.create_pokemon(pokemon_level, second_pokemon)
 
         else:
-            print('\nOpção inválida, tente novamente!\n')
+            print('\nOpção inválida!\n')
         
         os.system('cls')
 
@@ -164,7 +168,7 @@ class Pokedex:
 
                         pokemon_vencedor = new_arena.batalhar()
 
-                        # Verifica se existiu empate após uma rodada de vitória
+                        # Verifica se existiu empate após uma rodada de vitória, tendo como diferença os parâmetros que agora utilizam o pokemon que evoluiu e o novo oponente
                         if (pokemon_vencedor == None):
                             while(pokemon_vencedor == None):
                                 pokemon_evolucao.reset_hp()
@@ -172,7 +176,7 @@ class Pokedex:
                                 newArena = Arena(A = pokemon_evolucao, B = new_oponent)
                                 pokemon_vencedor = newArena.batalhar(is_tie= True)
                         
-                    # Se o jogador dacidir não continuar a gameplay, replay recebe False e o jogo acaba
+                    # Se o jogador dacidir não continuar a gameplay, replay recebe False, sai do while e o jogo acaba
                     elif acao == 2:
                         replay = False
                         print('[bold][green]F I M')
@@ -184,9 +188,9 @@ class Pokedex:
 
     def create_pokemon(self, level: int, pokemon_option: int) -> Pokemon:
         
-        # Se as escolhas estiverem fora do intervado de escolhas apresentadas, é retornado que a opção é inválida pedindo para tentar novamente
+        # Se as escolhas estiverem fora do intervado de escolhas apresentadas, é retornado que a opção é inválida
         if (level < 0 or level > 3) or (pokemon_option < 0 or pokemon_option > 3):
-            return Exception('Opção inválida, tente novamente!\n')
+            return Exception('Opção inválida!\n')
 
         #Checa o level e o pokemon escolhidos que serão passados nos parâmetros quando o método for chamado e vai retornar o pokémon que condiz com as caracteristicas. O retorno é instaciado em uma variável quando o método é chamado
         elif level == 1:
@@ -221,6 +225,8 @@ class Pokedex:
 
     def get_pokemon_list(self):
         return self.__pokemon_list
+
+    #Os métodos abaixo printam cada jogador na hora de escolher seu pokémon
 
     def choose_pokemon_A(self):
             print('\n[bold][red]JOGADOR 1' , '[bold]escolha o seu Pokémon!')

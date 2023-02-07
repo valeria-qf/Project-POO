@@ -8,9 +8,9 @@ class Ivysaur(Pokemon):
         if self.get_numero_vitorias() == 2:
             self.set_pokemon('Venusaur')
             self.set_hp(130)
-            self.set_attack(50)
-            self.set_defense(50)
-            self.set_special_attack(60)
+            self.set_attack(30)
+            self.set_defense(30)
+            self.set_special_attack(50)
             self.set_level(3)
             self.set_evolucao_ant('Ivysaur')
             self.set_evolucao_pos('-')

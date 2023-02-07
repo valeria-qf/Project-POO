@@ -8,9 +8,9 @@ class Bubasaur(Pokemon):
         if self.get_numero_vitorias() == 1:
             self.set_pokemon('Ivysaur')
             self.set_hp(115)
-            self.set_attack(40)
-            self.set_defense(40)
-            self.set_special_attack(50)
+            self.set_attack(25)
+            self.set_defense(25)
+            self.set_special_attack(45)
             self.set_level(2)
             self.set_evolucao_ant('Bubasaur')
             self.set_evolucao_pos('Venusaur')

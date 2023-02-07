@@ -18,7 +18,7 @@ from tqdm import tqdm
 class Pokedex:
 
     def __init__(self, pokemon_list: PokemonList) -> None:
-        self.__pokemon_list = pokemon_list
+        self.__pokemon_list = pokemon_list  # é utilizado para printar a lista de opções de pokemon de cada level
 
     # Método que printa texto no início do jogo
     def start_game(self):
@@ -106,7 +106,6 @@ class Pokedex:
         if pokemon_vencedor != None:
 
             # Quando houver um pokemon vencedor, o replay recebe True, logo vai ficar preso no while e verificando o vencedor e iniciando uma nova batalha
-
             replay: bool = True
             while replay:
 

@@ -139,8 +139,6 @@ class Arena:
 
     def action(self, option1: PokemonOptions, option2: PokemonOptions):
 
-        '''print('\n-------------------------------\nJOGADOR 1{} \nJOGADOR 2{}\n-------------------------------'.format(option1.print_your_option(),option2.print_your_option()))'''
-
         # BLOCO 1.1
         if option1 == PokemonOptions.atacar and option2 == PokemonOptions.atacar:
 

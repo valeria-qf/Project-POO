@@ -206,7 +206,7 @@ class Pokedex:
         if (level < 0 or level > 3) or (pokemon_option < 0 or pokemon_option > 3):
             return Exception('Opção inválida!\n')
 
-        #Checa o level e o pokemon escolhidos que serão passados nos parâmetros quando o método for chamado e vai retornar o pokémon que condiz com as caracteristicas. O retorno é instaciado em uma variável quando o método é chamado
+        # Checa o level e o pokemon escolhidos que foram passados nos parâmetros de create_pokemon. Quando o método for chamado, ele vai retornar o pokémon que condiz com as opções e instanciar uma variável com esse retorno.
         elif level == 1:
             if pokemon_option == 1:
                 return Bubasaur()

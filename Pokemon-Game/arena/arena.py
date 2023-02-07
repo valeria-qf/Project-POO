@@ -24,20 +24,21 @@ class Arena:
         # Enquanto o hp de ambos os pokémon for maior que '0' a batalha continua
         while ((self.A.get_hp() > 0) and (self.B.get_hp() > 0)):
 
-            # Quando o pokémon entiver com seu hp em um intervalo entre 1 e 50, a variável enable_special_attack vai receber um valor booleano. Quando for True, a opção do ataque especial é liberada
+            # Quando o pokémon entiver com seu hp em um intervalo entre 1 e 50, a variável enable_special_attack vai receber um valor booleano.
             enable_special_attack_pokemon_A = self.A.get_hp() >= 1 and self.A.get_hp() <= 50
             enable_special_attack_pokemon_B = self.B.get_hp() >= 1 and self.B.get_hp() <= 50
 
-
+            # Se a variável booleana for True, aparece no menu a opção de ataque especial, senão, aparece apenas atacar e defender
             print(self.A.list_options(enable_special_attack = enable_special_attack_pokemon_A))
             print('\n[bold][red]JOGADOR 1', 'é a sua vez!\n')
             acaoJogador1 = input()
 
+            # Se a variável booleana for True, aparece no menu a opção de ataque especial, senão, aparece apenas atacar e defender
             print(self.B.list_options(enable_special_attack = enable_special_attack_pokemon_B))
             print('[bold][blue]JOGADOR 2', 'é a sua vez!\n')
             acaoJogador2 = input()
 
-            # Verificações de todas as combinações possíveis ao longo da batalha
+            # Verificações de todas as combinações possíveis ao longo da batalha e chamada do método action que realiza as ações escolhidas. Ex: jogador 1 escolhe atacar e jogador 2 escolhe atacar - O método action passa as opções como parâmetro e os métodos de ataque de cada pokémon é chamado(self.A.atacar(self.B); self.B.atacar(self.A))
 
             # BLOCO 1 (jogador 1 sempra ataca)
             if acaoJogador1 == '1' and acaoJogador2 == '1':
@@ -47,7 +48,14 @@ class Arena:
                 self.action(PokemonOptions.atacar, PokemonOptions.defender)
 
             elif acaoJogador1 == '1' and acaoJogador2 == '3':
-                self.action(PokemonOptions.atacar, PokemonOptions.ataque_especial)
+
+                # Verifica se o ataque especial está disponível para uso (mesmo não aparecendo no menu, se o jogador selecionasse 3 por engano o ataque especial era ativado)
+                if enable_special_attack_pokemon_B == True: 
+                    self.action(PokemonOptions.atacar, PokemonOptions.ataque_especial)
+
+                # Se não estiver disponível, é feito o print e os jogadores podem tentar novamente
+                else:
+                    print('\n[red][bold]Opção inválida, tente novamente!\n') 
 
             # BLOCO 2 (jogador 1 sempre defende)
             elif acaoJogador1 == '2' and acaoJogador2 == '1':
@@ -57,25 +65,42 @@ class Arena:
                 self.action(PokemonOptions.defender, PokemonOptions.defender)
         
             elif acaoJogador1 == '2' and acaoJogador2 == '3':
-                self.action(PokemonOptions.defender, PokemonOptions.ataque_especial)
+
+                if enable_special_attack_pokemon_B == True:
+                    self.action(PokemonOptions.defender, PokemonOptions.ataque_especial)
+                else:
+                    print('\n[red][bold]Opção inválida, tente novamente!\n')
+
 
             # BLOCO 3 (jogador 1 sempre uma o ataque especial)
             elif acaoJogador1 == '3' and acaoJogador2 == '1':
-                self.action(PokemonOptions.ataque_especial, PokemonOptions.atacar)
+                if enable_special_attack_pokemon_A == True:
+                    self.action(PokemonOptions.ataque_especial, PokemonOptions.atacar)
 
             elif acaoJogador1 == '3' and acaoJogador2 == '2':
-                self.action(PokemonOptions.ataque_especial, PokemonOptions.defender)
+
+                if enable_special_attack_pokemon_A == True:
+                    self.action(PokemonOptions.ataque_especial, PokemonOptions.defender)
+                else:
+                    print('\n[red][bold]Opção inválida, tente novamente!\n')
 
             elif acaoJogador1 == '3' and acaoJogador2 == '3':
-                self.action(PokemonOptions.ataque_especial, PokemonOptions.ataque_especial)
+
+                if enable_special_attack_pokemon_A == True and enable_special_attack_pokemon_B == True:
+                    self.action(PokemonOptions.ataque_especial, PokemonOptions.ataque_especial)
+                else:
+                    print('\n[red][bold]Opção inválida, tente novamente!\n')
 
             else:
                 print('\n[red][bold]Opção inválida, tente novamente!\n')
 
-        # CHECA QUEM VENCEU E INCREMENTA NUMERO DE VITORIAS E DERROTAS
+        # APÓS A BATALHA CHECA QUEM VENCEU E INCREMENTA NUMERO DE VITORIAS E DERROTAS
 
         if self.A.get_hp() == 0 and self.B.get_hp() == 0:
-            print('--------------------\nEMPATE!\n--------------------')
+            print('[bold][yellow]--------------------\nEMPATE!\n--------------------')
+            print('\n[bold]Pressione [yellow]ENTER [white]para jogar novamente')
+            input()
+            os.system('cls')
 
             # Retorna None pois nenhum jogador venceu
             return None
@@ -84,7 +109,7 @@ class Arena:
 
             os.system('cls')
 
-            print('[bold]\n{} VENCEU! :trophy:\n'.format(self.B.get_pokemon()))
+            print('[bold]\n{} do [blue]JOGADOR 2 [white]VENCEU! :trophy:\n'.format(self.B.get_pokemon()))
             self.A.set_numero_derrotas()
             self.B.set_numero_vitorias()
 
@@ -98,7 +123,7 @@ class Arena:
 
             os.system('cls')
             
-            print('[bold]\n{} VENCEU! :trophy:\n'.format(self.A.get_pokemon()))
+            print('[bold]\n{} do [red]JOGADOR 1 [white]VENCEU! :trophy:\n'.format(self.A.get_pokemon()))
 
             self.B.set_numero_derrotas()
             self.A.set_numero_vitorias()
@@ -174,7 +199,7 @@ class Arena:
     # Método que printa o Hp de ada pokémon
     def print_hp(self):
 
-        print('[bold][white]\n------------------------\nHP de {} = {} \nHP de {} = {}\n------------------------\n'.format(self.A.get_pokemon(), self.A.get_hp(), self.B.get_pokemon(), self.B.get_hp()))
+        print('[bold]\n----------------------------------\n[red]JOGADOR 1 [white]- HP de {} = {} \n[blue]JOGADOR 2 [white]- HP de {} = {}\n----------------------------------\n'.format(self.A.get_pokemon(), self.A.get_hp(), self.B.get_pokemon(), self.B.get_hp()))
 
 
     # Método que verifica qual o tipo de pokémon é melhor contra o outro e incrementa no ataque e ataque especial.Exemplo: tipo Água é melhor que tipo fogo, então o pokemon do tipo água incrementa 5 no ataque basico e 15 no ataque especial

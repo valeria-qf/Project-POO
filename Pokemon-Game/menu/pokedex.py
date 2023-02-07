@@ -14,6 +14,7 @@ from rich import print
 import time
 import os
 from tqdm import tqdm
+
 class Pokedex:
 
     def __init__(self, pokemon_list: PokemonList) -> None:
@@ -25,7 +26,7 @@ class Pokedex:
         print('Bem vindo ao Pokémon game um mini jogo onde você iniciará sua jornada como treinador pokémon! \nPara iniciar o jogo, primeiro é selecionado o level da batalha e depois \ncada jogador deverá escolher seu pokémon de acordo com o level escolhido.\n\n[bold][white]Ex: level 1 [bold]\n\nBubasaur :seedling: \nCharmander :fire: \nSquirtle :droplet:\n')
 
         
-        print('[bold]\nPressione [yellow]ENTER [white]para continuar!')
+        print('[bold]\nPressione [yellow]ENTER [white]para continuar')
 
         input()
         os.system('cls')
@@ -81,16 +82,16 @@ class Pokedex:
 
         print('[bold]\n-------------------------------\n[red]JOGADOR 1 [white]escolheu {} \n\n[blue]JOGADOR 2 [white]escolheu {}\n-------------------------------\n\n'.format(pokemon_one.get_pokemon(), pokemon_two.get_pokemon()))
 
-        print('[yellow][bold]\n---------- CRIANDO ARENA ----------\n')
-        for i in tqdm(range(0, 10)):
-            time.sleep(0.2)
+        # ANIMAÇÃO BARRA DE CARREGAMENTO
+        self.carregamento_arena_criada()
         
         print('\n[bold]Pressione [yellow]ENTER [white]para continuar!')
         input()
         os.system('cls')
-
+        
         arena = Arena(A = pokemon_one, B = pokemon_two)
-        # arena.batalhar retorna o pokemon vencedor da batalha
+
+        # pokrmon vencedor vai armazenar o retorno da batalha, que é um pokémon
         pokemon_vencedor = arena.batalhar()
 
         # Se não houver vencedor, ou seja, empate, o hp dos pokemon será resetado, uma nova arena é instanciada e é chamada uma nova arena que também terá um vencedor como retorno. Essa conndição fica presa no while até existir um  retorno diferente de None
@@ -142,7 +143,7 @@ class Pokedex:
                     if acao == 1:
                         nivel_vencedor = pokemon_vencedor.get_level()
 
-                        print('[green]Escolha um Pokémon abaixo:\n')
+                        print('\n[green]Escolha um novo Pokémon para lutar com o vencedor:\n')
 
                         # o level 1 não é verificado, pois o vencedor sempre evolui após vencer a batalha, logo nunca será level 1
 
@@ -151,22 +152,34 @@ class Pokedex:
 
                             self.__pokemon_list.list_pokemon_level2()
 
-                            other_pokemon = int(input())
+                            other_pokemon = int(input('\n'))
                             new_oponent = self.create_pokemon(2, other_pokemon)
 
 
                         elif nivel_vencedor == 3:
                             self.__pokemon_list.list_pokemon_level3()
                             
-                            other_pokemon = int(input())
+                            other_pokemon = int(input('\n'))
                             new_oponent = self.create_pokemon(3, other_pokemon)
-                        
-                        # No fim da verificação, a nova arena é criada e é passado como parâmetro o pokemon vencedor(que evoluiu) e o novo oponente
 
+                        
+                        print('\n[bold]Pressione [yellow]ENTER [white]para continuar')
+                        input()
+                        os.system('cls')
+
+                        print('[bold]\n-------------------------------\n[red]JOGADOR 1 [white]escolheu {} \n\n[blue]JOGADOR 2 [white]escolheu {}\n-------------------------------\n\n'.format(pokemon_evolucao.get_pokemon(), new_oponent.get_pokemon()))
+
+                        # ANIMAÇÃO BARRA DE CARREGAMENTO
+                        self.carregamento_arena_criada()
+
+                        print('\n[bold]Pressione [yellow]ENTER [white]para continuar')
+                        input()
+                        os.system('cls')
+
+                        # No fim da verificação, a nova arena é criada e é passado como parâmetro o pokemon vencedor(que evoluiu) e o novo oponente
                         new_arena = Arena(A = pokemon_evolucao, B = new_oponent)
 
-                        #pokemon vencedor recebe new arena pois vai ser utilizado como retorno e renovar a variável pokemon evolução
-
+                        # pokemon vencedor vai armazenar o retorno da batalha e é usado para renovar a variável pokemon evolução
                         pokemon_vencedor = new_arena.batalhar()
 
                         # Verifica se existiu empate após uma rodada de vitória, tendo como diferença os parâmetros que agora utilizam o pokemon que evoluiu e o novo oponente
@@ -180,6 +193,7 @@ class Pokedex:
                     # Se o jogador dacidir não continuar a gameplay, replay recebe False, sai do while e o jogo acaba
                     elif acao == 2:
                         replay = False
+                        os.system('cls')
                         print('[bold][green]F I M')
 
                 # Número de batalhas maior que 2, os seja, já jogou a sua última batalha no level final, completando 3 vitórias
@@ -226,6 +240,11 @@ class Pokedex:
 
     def get_pokemon_list(self):
         return self.__pokemon_list
+    
+    def carregamento_arena_criada(self):
+        print('[yellow][bold]\n---------- CRIANDO ARENA ----------\n')
+        for i in tqdm(range(0, 10)):
+            time.sleep(0.2)
 
     #Os métodos abaixo printam cada jogador na hora de escolher seu pokémon
 

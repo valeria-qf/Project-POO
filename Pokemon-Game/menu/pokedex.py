@@ -88,36 +88,39 @@ class Pokedex:
         pokemon_vencedor = arena.batalhar()
 
         if pokemon_vencedor == None:
-                pokemon_one.reset_hp()
-                pokemon_two.reset_hp()
-                newArena = Arena(A = pokemon_one, B = pokemon_two)
-                pokemon_vencedor = newArena.batalhar()
+                while pokemon_vencedor == None:
+                    pokemon_one.reset_hp()
+                    pokemon_two.reset_hp()
+                    newArena = Arena(A = pokemon_one, B = pokemon_two)
+                    pokemon_vencedor = newArena.batalhar(is_tie = True)
 
         if pokemon_vencedor != None:
-
-            pokemon_evolucao = pokemon_vencedor
-
-            if isinstance(pokemon_evolucao, Charmander):
-                pokemon_evolucao = Charmeleon()
-            
-            elif isinstance(pokemon_vencedor, Charmeleon):
-                pokemon_evolucao = Charizard()
-
-            elif isinstance(pokemon_vencedor,  Bubasaur):
-                pokemon_evolucao = Ivysaur()
-
-            elif isinstance(pokemon_vencedor, Ivysaur):
-                pokemon_evolucao = Venusaur()
-
-            elif isinstance(pokemon_vencedor, Squirtle):
-                pokemon_evolucao = Wartortle()
-
-            elif isinstance(pokemon_vencedor, Wartortle):
-                pokemon_evolucao = Blastoise()
 
         
             replay: bool = True
             while replay:
+
+                pokemon_evolucao = pokemon_vencedor
+
+                if isinstance(pokemon_evolucao, Charmander):
+                    pokemon_evolucao = Charmeleon()
+                
+                elif isinstance(pokemon_vencedor, Charmeleon):
+                    pokemon_evolucao = Charizard()
+
+                elif isinstance(pokemon_vencedor,  Bubasaur):
+                    pokemon_evolucao = Ivysaur()
+
+                elif isinstance(pokemon_vencedor, Ivysaur):
+                    pokemon_evolucao = Venusaur()
+
+                elif isinstance(pokemon_vencedor, Squirtle):
+                    pokemon_evolucao = Wartortle()
+
+                elif isinstance(pokemon_vencedor, Wartortle):
+                    pokemon_evolucao = Blastoise()
+
+                # Se o número de vitórias for menor que 3 os jogadores tem a opção de continuar, senão, ao batalhar no último nível, o número de vitórias é igual a 3 e jogo chega ao fim
                 if pokemon_evolucao.get_numero_vitorias() < 3:
             
                     print('[green]Deseja continuar? [bold][white]\n\n1 - SIM \n2 - NÃO\n')
@@ -127,13 +130,6 @@ class Pokedex:
                         nivel_vencedor = pokemon_vencedor.get_level()
 
                         print('[green]Escolha um Pokémon abaixo:\n')
-                        
-                        '''if nivel_vencedor == 1:
-                            self.__pokemon_list.list_pokemon_level1()
-
-                            second_pokemon = int(input())
-                            new_oponent = self.create_pokemon(1, other_pokemon)
-                        '''
 
                         if nivel_vencedor == 2:
                             self.__pokemon_list.list_pokemon_level2()
@@ -148,9 +144,18 @@ class Pokedex:
                             other_pokemon = int(input())
                             new_oponent = self.create_pokemon(3, other_pokemon)
                             
+                        pokemon_evolucao.reset_hp()
                         new_arena = Arena(A = pokemon_evolucao, B = new_oponent)
-                        pokemon_vencedor.reset_hp()
+                        #pokemon vencedor recebe new arena pois vai ser utilizado como retorno e renovar a variável pokemon evolução
                         pokemon_vencedor = new_arena.batalhar()
+
+                        # Verifica se existiu empate após uma rodada de vitória
+                        if (pokemon_vencedor == None):
+                            while(pokemon_vencedor == None):
+                                pokemon_evolucao.reset_hp()
+                                new_oponent.reset_hp()
+                                newArena = Arena(A = pokemon_evolucao, B = new_oponent)
+                                pokemon_vencedor = newArena.batalhar(is_tie= True)
                         
                     elif acao == 2:
                         replay = False

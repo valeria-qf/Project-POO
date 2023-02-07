@@ -10,10 +10,12 @@ class Arena:
         self.A = A
         self.B = B
 
-    def batalhar(self) -> Pokemon:
+    def batalhar(self, is_tie: bool = False) -> Pokemon:
 
+        # se for empate, não entra na condição para verificar o tipo do pokémon, já está verificado
+        if not is_tie:
         # Verifica o tipo dos pokémon que estão batalhando
-        self.pokemon_tipe()
+            self.pokemon_tipe()
 
         while ((self.A.get_hp() > 0) and (self.B.get_hp() > 0)):
 

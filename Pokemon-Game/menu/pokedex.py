@@ -40,7 +40,8 @@ class Pokedex:
 
         pokemon_one: Pokemon
         pokemon_two: Pokemon
-    
+
+        # Verifica qual o level escolhido e mostra as opções de pokemon acordo com a escolha.Um input é dado para cada jogador. Após isso, o método create_pokemon é chamado e é passado como parâmetro o level escolhido e o pokemon escolhido. Esse método verifica qual o pokémon que vai ser criado e gera um retorno que é instanciado em pokemon_one e pokemon_two
         if pokemon_level == 1:
             self.__pokemon_list.list_pokemon_level1()
             self.choose_pokemon_A()
@@ -183,9 +184,11 @@ class Pokedex:
 
     def create_pokemon(self, level: int, pokemon_option: int) -> Pokemon:
         
+        # Se as escolhas estiverem fora do intervado de escolhas apresentadas, é retornado que a opção é inválida pedindo para tentar novamente
         if (level < 0 or level > 3) or (pokemon_option < 0 or pokemon_option > 3):
             return Exception('Opção inválida, tente novamente!\n')
 
+        #Checa o level e o pokemon escolhidos que serão passados nos parâmetros quando o método for chamado e vai retornar o pokémon que condiz com as caracteristicas. O retorno é instaciado em uma variável quando o método é chamado
         elif level == 1:
             if pokemon_option == 1:
                 return Bubasaur()

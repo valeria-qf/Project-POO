@@ -11,7 +11,7 @@ class Ivysaur(Pokemon):
             self.set_hp(130)
             self.set_attack(30)
             self.set_defense(30)
-            self.set_special_attack(50)
+            self.set_special_attack(55)
             self.set_level(3)
             self.set_evolucao_ant('Ivysaur')
             self.set_evolucao_pos('-')

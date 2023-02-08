@@ -5,7 +5,7 @@ from pokemon_enum.pokemon_options import PokemonOptions
 '''Criação da classe concreta Pokemon que implementa a interface IPokemon'''
 class Pokemon(IPokemon):
 
-    # Construtor da classe Pokemon'''
+    # Construtor da classe Pokemon
     def __init__(self, pokemon: str, hp: int, attack: int, defense: int, special_attack: int, numero_vitorias: int, numero_derrotas: int, level: int, evolucao_ant: str, evolucao_pos: str, tipo: str) -> None: 
         self.__pokemon = pokemon
         self.__hp = hp
@@ -24,8 +24,8 @@ class Pokemon(IPokemon):
         return '\n---------------------------\nPokémon: {} \nTipo: {} \nHp: {} \nAttack: {} \nDefense: {} \nSpecial attack: {} \nLevel: {}\nVictories: {} \nDefeats: {} \nPrevious evolution: {} \nNext evolution: {}\n---------------------------'.format(self.__pokemon, self.__tipo, self.__hp, self.__attack, self.__defense, self.__special_attack, self.__level, self.__numero_vitorias, self.__numero_derrotas, self.__evolucao_ant, self.__evolucao_pos)
 
 
-    ''' Método atacar passa o rival como parâmetro
-    Se o hp do rival por menor que o ataque, o hp do rival recebe '0'
+    ''' Método atacar passa o rival como parâmetro.
+    Se o hp do rival for menor que o ataque, o hp do rival recebe '0'
     Senão, o hp do rival apenas decrementa do ataque'''
 
     def atacar(self, rival) -> int:
@@ -76,7 +76,18 @@ class Pokemon(IPokemon):
             else:
                 self.__hp -= dano
 
-    '''Método evoluir é chamado o número de vitórias em set_numero_vitorias é incrementado
+    '''Método reseta o hp do pokemon novamente. Exemplo: quando ocorre um empate e o pokemon precisa batalhar novamente'''
+    def reset_hp(self):
+        if self.__level == 1:
+            self.__hp = 100
+
+        elif self.__level == 2:
+            self.__hp = 115
+        
+        elif self.__level == 3:
+            self.__hp = 130
+
+    '''Método evoluir é chamado quando número de vitórias em set_numero_vitorias é incrementado
         Quando o evoluir é chamado, as informações do pokémon são setadas e cada um possui o seu evoluir diferente'''
     def evoluir(self):
         return # retorno que não gera resultado

@@ -196,7 +196,7 @@ class Pokedex:
                         os.system('cls')
                         print('[bold][green]F I M')
 
-                # Número de batalhas maior que 2, os seja, já jogou a sua última batalha no level final, completando 3 vitórias
+                # Número de batalhas maior que 2, o  jogador já jogou a sua última batalha no level final, completando 3 vitórias
                 else:
                     print('[bold][green]F I M')
                     break
@@ -253,4 +253,3 @@ class Pokedex:
 
     def choose_pokemon_B(self):
             print('\n[bold][blue]JOGADOR 2' , '[bold]escolha o seu Pokémon!')
-            

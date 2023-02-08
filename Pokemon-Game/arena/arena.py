@@ -1,10 +1,9 @@
 from implementation.pokemon import Pokemon
 from pokemon_enum.pokemon_options import PokemonOptions
 from rich import print
-
 import os
-class Arena:
 
+class Arena:
 
     def __init__(self, A: Pokemon, B: Pokemon) -> None:
         self.A = A
@@ -24,8 +23,8 @@ class Arena:
         # Enquanto o hp de ambos os pokémon for maior que '0' a batalha continua
         while ((self.A.get_hp() > 0) and (self.B.get_hp() > 0)):
 
-            # Quando o pokémon entiver com seu hp em um intervalo entre 1 e 50, a variável enable_special_attack vai receber um valor booleano.
-            enable_special_attack_pokemon_A = self.A.get_hp() >= 1 and self.A.get_hp() <= 50
+            # Quando o pokémon estiver com seu hp em um intervalo entre 1 e 50, a variável enable_special_attack vai receber um valor booleano.
+            enable_special_attack_pokemon_A =  self.A.get_hp() >= 1 and self.A.get_hp() <= 50
             enable_special_attack_pokemon_B = self.B.get_hp() >= 1 and self.B.get_hp() <= 50
 
             # Se a variável booleana for True, aparece no menu de A a opção de ataque especial, senão, aparece apenas atacar e defender

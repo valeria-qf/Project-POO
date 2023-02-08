@@ -19,3 +19,7 @@ class IPokemon(ABC):
     @abstractmethod
     def evoluir(self):
         pass
+
+    @abstractmethod
+    def reset_hp(self):
+        pass

@@ -2,7 +2,7 @@
 from interface.ipokemon import IPokemon
 from pokemon_enum.pokemon_options import PokemonOptions
 
-'''Criação da classe concreta Pokemon que implementa a interface IPokemon'''
+'''Criação da classe concreta Pokemon que implementa a interface IPokemon que possui os principais métodos de cada pokemon'''
 class Pokemon(IPokemon):
 
     # Construtor da classe Pokemon
@@ -148,7 +148,7 @@ class Pokemon(IPokemon):
     def set_pokemon(self, pokemon: str):
         self.__pokemon = pokemon
 
-    '''Quando o número de vitórias é iincrementado, o método evoluir para editar as informações do pokémon é chamado'''
+    '''Quando o número de vitórias é incrementado, o método evoluir para editar as informações do pokémon é chamado'''
     def set_numero_vitorias(self):
         self.__numero_vitorias += 1
         self.evoluir()
